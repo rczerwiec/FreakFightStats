@@ -1,5 +1,6 @@
 import Express, { Response, Request} from "express"
 import LoginRouter from "./routes/login";
+import PlayerRouter from "./routes/player";
 import mongoose from "mongoose";
 import 'dotenv/config';
 import { loginCheck } from "../auth/passport";
@@ -34,6 +35,7 @@ app.use(passport.session());
 
 
 app.use('/', LoginRouter);
+app.use('/player',PlayerRouter)
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is working on localhost:${port}`)
