@@ -3,7 +3,7 @@ import LoginRouter from "./routes/login";
 import PlayerRouter from "./routes/player";
 import mongoose from "mongoose";
 import 'dotenv/config';
-import { loginCheck } from "../auth/passport";
+import { loginCheck } from "./auth/passport";
 import passport from "passport";
 import session from "express-session";
 loginCheck(passport);

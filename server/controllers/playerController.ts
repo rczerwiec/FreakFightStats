@@ -35,3 +35,14 @@ export const getPlayers = async (req: Request, res: Response) => {
     res.json(players);
   } catch (err) {}
 };
+
+export const getPlayer = async (req: Request, res: Response) => {
+  try{
+    const player = await Player.findById({id: req.params.playerId})
+
+    res.json(player);
+  }
+  catch(err){
+    
+  }
+}

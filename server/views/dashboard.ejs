@@ -1,15 +1,37 @@
 <%- include('layout.ejs'); %>
-<div class="container">
-    <div class="d-flex flex-column column justify-content-center">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Strona Główna</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Zawodnicy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Najbliższa Gala</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="card">
+    <div class=" mx-5">
 
         <%- include('createPlayerForm.ejs'); %>
 
     </div>
     <div>
-        <% players = players.map(function(player) {
-            return '<form><button class="g-col-6">' + player.name + '</button></form>';
-        }) -%>
-        <div class="grid text-center"><%- players.join("") %></div>
+        <% for(let player of players) { %>
+            <% const action="/dashboard/player/"+player.id %>
+            <form method="get" action=<%= action  %>>
+                <button><%= player.name %></button>
+            </form>
+        <% } %>
     </div>
 </div>
 <div>

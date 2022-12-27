@@ -17,10 +17,6 @@ export const PlayerSchema = new mongoose.Schema({
         type:Number,
         required: true,
     },
-    championships: {
-        type:String,
-        required: true,
-    }
 }) 
 
 export default mongoose.model("Player", PlayerSchema);

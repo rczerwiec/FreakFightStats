@@ -1,13 +1,19 @@
-<form class="d-flex flex-column" method="post" action="/player">
-    <label>Nazwa</label>
-    <input name="name" id="name"/>
-    <label>Wygrane</label>
-    <input name="wins" id="wins"/>
-    <label>Remisy</label>
-    <input name="draws" id="draws"/>
-    <label>Przegrane</label>
-    <input name="loses" id="loses"/>
-    <label>Mistrzostwo</label>
-    <input name="championships" id="championships"/>
-    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Utwórz</button>
+<form method="post" action="/player">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Nazwa zawodnika</label>
+        <input name="name" id="name" class="form-control" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Wygrane</label>
+        <input name="wins" id="wins" class="form-control" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Remisy</label>
+        <input name="draws" id="draws" class="form-control" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Porażki</label>
+        <input name="loses" id="loses" class="form-control" aria-describedby="emailHelp">
+    </div>
+    <button type="submit" class="btn btn-primary login-button">Utwórz</button>
 </form>

@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs"
 import LocalStrategy from "passport-local"
-import { User } from "../server/models/User";
+import { User } from "../models/User";
 //Load model
 
 export const loginCheck = (passport:any) => {

@@ -61,5 +61,6 @@ export const loginUser = (req: Request, res: Response) => {
         failureRedirect: "/",
         failureFlash: true,
       })(req, res);
+      
     }
   };

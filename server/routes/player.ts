@@ -7,4 +7,5 @@ router.post('/', createPlayer);
 
 router.get('/', getPlayers);
 
+
 export default router;

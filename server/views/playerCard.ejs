@@ -1,3 +1,51 @@
-<div>
-    Zawodnik
+<%- include('layout.ejs'); %>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/dashboard">Strona Główna</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Zawodnicy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Najbliższa Gala</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="card">
+    <% const editPlayer = "/dashboard/editPlayer/" + player._id%>
+    <form method="post" action=<%= editPlayer %>>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nazwa zawodnika</label>
+            <input  name="name" id="name" class="form-control" aria-describedby="emailHelp" value=<%= player.name %>>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Wygrane</label>
+            <input name="wins" id="wins" class="form-control" aria-describedby="emailHelp" value=<%= player.wins %>>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Remisy</label>
+            <input name="draws" id="draws" class="form-control" aria-describedby="emailHelp" value=<%= player.draws %>>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Porażki</label>
+            <input name="loses" id="loses" class="form-control" aria-describedby="emailHelp" value=<%= player.loses %>>
+        </div>
+        <button type="submit" class="btn btn-primary login-button">Utwórz</button>
+    </form>
 </div>
+<div>
+
+    <a href="/logout"> <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Logout</button> </a>
+</div>
+
+</body>
+
+</html>
