@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-table";
 
 type Player = {
+  rank: number,
   name: string;
   wins: number;
   draws: number;
@@ -18,13 +19,21 @@ type Player = {
   points: number;
   federations: string;
   lastMatch: string;
-  last: any;
   debiut: string;
+  lastRank: any;
+  currentRank: number,
+  rankDif: number,
 };
 
 const columnHelper = createColumnHelper<Player>();
 
 const columns = [
+  columnHelper.accessor("currentRank", {
+    header: () => "Rk",
+  }),
+  columnHelper.accessor("xdf", {
+    header: () => "",
+  }),
   columnHelper.accessor("name", {
     header: () => "Zawodnik",
   }),
@@ -42,7 +51,6 @@ const columns = [
   }),
   columnHelper.accessor("points", {
     header: () => "Punkty",
-    enableSorting: true,
   }),
   columnHelper.accessor("federations", {
     header: () => "Federacje",
@@ -53,9 +61,13 @@ const columns = [
   columnHelper.accessor("debiut", {
     header: () => "Debiut",
   }),
-  columnHelper.accessor("last", {
-    header: () => "",
+  columnHelper.accessor("lastRank", {
+    header: () => "Ostatnio",
   }),
+  columnHelper.accessor("rankDif", {
+    header: () => "+/-",
+  }),
+
 ];
 
 export default function Table({ players }) {

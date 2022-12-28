@@ -29,6 +29,7 @@ export const createPlayer = (req: Request, res: Response) => {
     if (!name || !wins || !loses || !draws) {
       console.log("Wypełnij wszystkie pola");
     } else {
+      
       const newPlayer = new Player({
         name,
         wins,
@@ -51,12 +52,42 @@ export const createPlayer = (req: Request, res: Response) => {
     res.redirect("/");
   }
 };
-
+ 
 export const getPlayers = async (req: Request, res: Response) => {
   try {
     const players = await Player.find();
+ 
+    //console.log(players);
+    players.sort((a:any, b:any) => {
 
-    res.json(players);
-  } catch (err) {}
+        return ((a.points - b.points) * -1);
+    });
+
+    players.map((player, index) => {
+      let rankDif;  
+      if(player.lastRank === index+1){
+          rankDif = 0;
+        }
+        else{
+          rankDif = player.lastRank - (index+1)
+        }
+      
+
+        Player.findOneAndUpdate(player._id,{$set: {currentRank: index+1, rankDif:rankDif, lastRank:player.lastRank}}, { new: true },
+          (err, model) => {
+            if (err) {
+              //console.error(err);
+            } else {
+              //console.log(model);
+            }
+          })
+    })
+    const sortedPlayers = await Player.find();
+
+    //console.log(sortedPlayers);
+    res.json(sortedPlayers);
+  } catch (err) {
+    console.log(err)
+  }
 };
 

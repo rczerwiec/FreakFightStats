@@ -37,12 +37,13 @@ const calculateRanking =(wins: number,loses: number,draws: number, matches: numb
 }
 
 export const patchPlayer = async (req: any, res: any) => {
-  const { name, wins, loses, draws, points, federations, lastMatch,debiut } = req.body;
+  const { name, wins, loses, draws, points, federations, lastMatch,debiut, currentRank} = req.body;
   console.log(req.body);
   if (req.user) {
     if (!name || !wins || !loses || !draws) {
       console.log("Wypełnij wszystkie pola");
     } else {
+
       Player.findByIdAndUpdate(
         req.params.playerId,
         {
@@ -56,6 +57,7 @@ export const patchPlayer = async (req: any, res: any) => {
             federations: federations,
             lastMatch: lastMatch,
             debiut: debiut,
+            lastRank: currentRank,
           },
         },
         { new: true },

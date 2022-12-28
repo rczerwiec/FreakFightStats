@@ -34,7 +34,19 @@ export const PlayerSchema = new mongoose.Schema({
     },
     debiut:{
         type:String,
-    }
+    },
+    rankDif:{
+        type:Number,
+        default: 0,
+    },
+    lastRank:{
+        type:Number,
+        default: 0,
+    },
+    currentRank:{
+        type:Number,
+        default: 0,
+    }   
 }) 
 
 export default mongoose.model("Player", PlayerSchema);
