@@ -23,22 +23,39 @@
     <% const editPlayer = "/dashboard/editPlayer/" + player._id%>
     <form method="post" action=<%= editPlayer %>>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nazwa zawodnika</label>
-            <input  name="name" id="name" class="form-control" aria-describedby="emailHelp" value=<%= player.name %>>
+            <% const playerName =  player.name %>
+            <label  class="form-label"><%= playerName %></label>
+            <input  name="name" id="name" class="form-control"  value='<%= playerName %>'>
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Wygrane</label>
-            <input name="wins" id="wins" class="form-control" aria-describedby="emailHelp" value=<%= player.wins %>>
+            <label  class="form-label">Wygrane</label>
+            <input name="wins" id="wins" class="form-control"  value=<%= player.wins %>>
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Remisy</label>
-            <input name="draws" id="draws" class="form-control" aria-describedby="emailHelp" value=<%= player.draws %>>
+            <label  class="form-label">Remisy</label>
+            <input name="draws" id="draws" class="form-control"  value=<%= player.draws %>>
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Porażki</label>
-            <input name="loses" id="loses" class="form-control" aria-describedby="emailHelp" value=<%= player.loses %>>
+            <label  class="form-label">Porażki</label>
+            <input name="loses" id="loses" class="form-control"  value=<%= player.loses %>>
         </div>
-        <button type="submit" class="btn btn-primary login-button">Utwórz</button>
+        <div class="mb-3">
+            <label class="form-label">Punkty</label>
+            <input name="points" id="points" class="form-control" value=<%= player.points %>>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Federacje</label>
+            <input name="federations" id="federations" class="form-control" value='<%= player.federations %>'>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ostatnia Walka</label>
+            <input name="lastMatch" id="lastMatch" class="form-control" value=<%= player.lastMatch %>>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Debiut</label>
+          <input name="debiut" id="debiut" class="form-control" value=<%= player.debiut %>>
+      </div>
+        <button type="submit" class="btn btn-primary login-button">Edytuj</button>
     </form>
 </div>
 <div>

@@ -17,6 +17,24 @@ export const PlayerSchema = new mongoose.Schema({
         type:Number,
         required: true,
     },
+    matches: {
+        type:Number,
+    },
+    points: {
+        type:Number,
+    },
+    federations: {
+        type:String,
+    },
+    lastMatch: {
+        type:String,
+    },
+    lastPosition:{
+        type:Number,
+    },
+    debiut:{
+        type:String,
+    }
 }) 
 
 export default mongoose.model("Player", PlayerSchema);

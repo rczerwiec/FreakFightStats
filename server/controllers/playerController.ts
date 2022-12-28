@@ -4,7 +4,26 @@ import passport from "passport";
 
 export const createPlayer = (req: Request, res: Response) => {
   console.log(req.body);
-  const { name, wins, loses, draws, championships } = req.body;
+  const { name, wins, loses, draws, championships, federations, lastMatch,debiut} = req.body;
+
+
+  const calculateRanking =(wins: number,loses: number,draws: number, matches: number) => {
+    let ranking = 1000;
+
+    // Dla każdej wygranej dodaj 100 punktów
+    ranking += 100 * wins;
+  
+    // Dla każdego remisu dodaj 50 punktów
+    ranking += 25 * draws;
+  
+    // Dla każdej przegranej odejmij 100 punktów
+    ranking -= 100 * loses;
+
+    ranking += 10 * matches;
+  
+    return ranking;
+  }
+
 
   if (req.user) {
     if (!name || !wins || !loses || !draws) {
@@ -16,6 +35,11 @@ export const createPlayer = (req: Request, res: Response) => {
         draws,
         loses,
         championships,
+        matches: (parseInt(wins) + parseInt(loses) + parseInt(draws)),
+        points: calculateRanking(wins,loses,draws, (parseInt(wins) + parseInt(loses) + parseInt(draws))),
+        federations: federations,
+        lastMatch: lastMatch,
+        debiut: debiut,
       });
 
       newPlayer.save();
@@ -36,13 +60,3 @@ export const getPlayers = async (req: Request, res: Response) => {
   } catch (err) {}
 };
 
-export const getPlayer = async (req: Request, res: Response) => {
-  try{
-    const player = await Player.findById({id: req.params.playerId})
-
-    res.json(player);
-  }
-  catch(err){
-    
-  }
-}
