@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-table";
 
 type Player = {
-  rank: number,
+  rank: number;
   name: string;
   wins: number;
   draws: number;
@@ -21,8 +21,8 @@ type Player = {
   lastMatch: string;
   debiut: string;
   lastRank: any;
-  currentRank: number,
-  rankDif: number,
+  currentRank: number;
+  rankDif: number;
 };
 
 const columnHelper = createColumnHelper<Player>();
@@ -31,9 +31,7 @@ const columns = [
   columnHelper.accessor("currentRank", {
     header: () => "Rk",
   }),
-  columnHelper.accessor("xdf", {
-    header: () => "",
-  }),
+
   columnHelper.accessor("name", {
     header: () => "Zawodnik",
   }),
@@ -67,13 +65,14 @@ const columns = [
   columnHelper.accessor("rankDif", {
     header: () => "+/-",
   }),
-
 ];
 
 export default function Table({ players }) {
   const [data, setData] = useState(() => [...players]);
-  const [sorting, setSorting] = useState<SortingState>([{desc: true, id:"points"}]);
-    console.log(sorting);
+  const [sorting, setSorting] = useState<SortingState>([
+    { desc: true, id: "points" },
+  ]);
+  console.log(sorting);
   const table = useReactTable({
     data,
     columns,
@@ -86,13 +85,17 @@ export default function Table({ players }) {
   });
 
   return (
-    <div className="p-2">
-      <table>
+    <div className="flex flex-wrap border border-red-600 rounded-lg drop-shadow-2xl">
+      <table className="bg-neutral-900 rounded-lg">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <tr key={headerGroup.id} >
               {headerGroup.headers.map((header) => (
-                <th key={header.id} colSpan={header.colSpan}>
+                <th
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  className="p-2 text-red-500 border-b border-red-600 hover:rounded-lg hover:bg-gray-200 hover:cursor-pointer"
+                >
                   {header.isPlaceholder ? null : (
                     <div
                       {...{
@@ -119,33 +122,16 @@ export default function Table({ players }) {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr key={row.id} className="border-b border-red-600">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td key={cell.id} className=" p-2 pb-5 pt-5 text-white">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
             </tr>
           ))}
         </tbody>
-        <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
       </table>
-      <div className="h-4" />
     </div>
   );
 }

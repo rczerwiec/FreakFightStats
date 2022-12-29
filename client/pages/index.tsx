@@ -1,17 +1,25 @@
 import Table from "../components/Table";
+import { motion } from "framer-motion";
 
 export default function Home(props: any) {
-
   return (
-    <div className="text-center h-screen">
-      <div className="flex flex-col my-auto">
-        <h2>Ranking FreakFight</h2>
-        <Table players={props.data}/>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="text-center h-screen "
+    >
+      <div className=" flex flex-col my-auto bg-gray">
+        <h2 className="text-xl text-white bg-black p-4 font-bold">
+          Ranking FreakFight w Polsce
+        </h2>
+        <div className="flex justify-center ">
+          <Table players={props.data} />
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
-
+//
 export const getServerSideProps = async () => {
   const response = await fetch("http://localhost:5000/player");
   const data = await response.json();
