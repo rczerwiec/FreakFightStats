@@ -6,12 +6,9 @@ pipeline {
         }
     }
     stages {
-        stage('server') { 
+        stage('install') { 
             steps {
                 sh 'npm install' 
-            }
-            steps {
-                sh 'npm run server'
             }
         }
     }
