@@ -10,7 +10,7 @@ export default function Home(props: any) {
     >
       <div className=" flex flex-col my-auto bg-gray">
         <h2 className="text-xl text-white bg-black p-4 font-bold">
-          Ranking FreakFighterow w Polsce
+          Ranking FreakFighterow w Polsce 
         </h2>
         <div className="flex justify-center ">
           <Table players={props.data} />
