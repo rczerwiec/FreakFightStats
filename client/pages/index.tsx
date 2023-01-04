@@ -21,7 +21,7 @@ export default function Home(props: any) {
 }
 //
 export const getServerSideProps = async () => {
-  const response = await fetch("http://localhost:5000/player");
+  const response = await fetch("http://127.0.0.1:5000/player");
   const data = await response.json();
 
   return {
