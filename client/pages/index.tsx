@@ -10,7 +10,7 @@ export default function Home(props: any) {
     >
       <div className=" flex flex-col my-auto bg-gray">
         <h2 className="text-xl text-white bg-black p-4 font-bold">
-          Ranking FreakFight w Polsce
+          Ranking FreakFighterow w Polsce
         </h2>
         <div className="flex justify-center ">
           <Table players={props.data} />
@@ -21,7 +21,7 @@ export default function Home(props: any) {
 }
 
 export const getServerSideProps = async () => {
-  const response = await fetch("http://5.189.184.91:5000/players");
+  const response = await fetch("http://5.189.184.91:5000/player");
   const data = await response.json();
 
   return {
