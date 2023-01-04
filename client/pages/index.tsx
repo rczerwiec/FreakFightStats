@@ -19,9 +19,9 @@ export default function Home(props: any) {
     </motion.div>
   );
 }
-//
+
 export const getServerSideProps = async () => {
-  const response = await fetch("http://127.0.0.1:5000/player");
+  const response = await fetch("http://5.189.184.91:5000/players");
   const data = await response.json();
 
   return {
