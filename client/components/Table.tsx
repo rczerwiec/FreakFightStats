@@ -20,7 +20,7 @@ type Player = {
   federations: string;
   lastMatch: string;
   debiut: string;
-  lastRank: any;
+  lastRank: number;
   currentRank: number;
   rankDif: number;
 };
@@ -67,12 +67,15 @@ const columns = [
   }),
 ];
 
-export default function Table({ players }) {
+export default function Table({ players }: {players:Player[];}) {
+
   const [data, setData] = useState(() => [...players]);
+
   const [sorting, setSorting] = useState<SortingState>([
     { desc: true, id: "points" },
   ]);
-  console.log(sorting);
+
+
   const table = useReactTable({
     data,
     columns,
