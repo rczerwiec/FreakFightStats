@@ -1,7 +1,8 @@
-import Player from "../models/Player";
+import PlayeModelr from "../models/Player";
+import { Player } from "../types/types";
 
 export const dashboardView = async (req: any, res: any) => {
-  const players = await Player.find();
+  const players = await PlayeModelr.find();
 
   res.render("dashboard", {
     user: req.user,
@@ -12,7 +13,7 @@ export const dashboardView = async (req: any, res: any) => {
 export const getPlayer = async (req: any, res: any) => {
   console.log(req.params.playerId);
   try {
-    const player = await Player.findById(req.params.playerId);
+    const player = await PlayeModelr.findById(req.params.playerId);
     res.render("playerCard", {
       player: player,
     });
@@ -37,14 +38,14 @@ const calculateRanking =(wins: number,loses: number,draws: number, matches: numb
 }
 
 export const patchPlayer = async (req: any, res: any) => {
-  const { name, wins, loses, draws, points, federations, lastMatch,debiut, currentRank} = req.body;
-  console.log(req.body);
+  const { name, wins, loses, draws, points, federations, lastMatch,debiut, currentRank}: Player = req.body;
+
   if (req.user) {
     if (!name || !wins || !loses || !draws) {
       console.log("Wypełnij wszystkie pola");
     } else {
 
-      Player.findByIdAndUpdate(
+      PlayeModelr.findByIdAndUpdate(
         req.params.playerId,
         {
           $set: {
@@ -52,8 +53,8 @@ export const patchPlayer = async (req: any, res: any) => {
             wins: wins,
             loses: loses,
             draws: draws,
-            matches: (parseInt(wins) + parseInt(loses) + parseInt(draws)),
-            points: calculateRanking(wins, loses, draws, (parseInt(wins) + parseInt(loses) + parseInt(draws))),
+            matches: (Number(wins) + Number(loses) + Number(draws)),
+            points: calculateRanking(wins, loses, draws, (Number(wins) + Number(loses) + Number(draws))),
             federations: federations,
             lastMatch: lastMatch,
             debiut: debiut,

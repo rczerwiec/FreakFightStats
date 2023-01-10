@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
-import { User } from "../models/User";
+import { UserModel } from "../models/User";
+import { User } from "../types/types";
 import bcrypt from "bcryptjs";
 import passport from "passport";
 // For View
@@ -15,7 +16,7 @@ export const registerUser = (req: Request, res: Response) => {
 //   }
 //   else {
 //     //Validation
-//     User.findOne({ email: email }).then((user) => {
+//     UserModel.findOne({ email: email }).then((user) => {
 //       if (user) {
 //         console.log("email exists");
 //         res.render("register", {
@@ -25,7 +26,7 @@ export const registerUser = (req: Request, res: Response) => {
 //         });
 //       } else {
 //         //Validation
-//         const newUser = new User({
+//         const newUser = new UserModel({
 //           name,
 //           email,
 //           password,
@@ -47,7 +48,7 @@ export const registerUser = (req: Request, res: Response) => {
 };
 
 export const loginUser = (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, password } : User = req.body;
     //Required
     if (!email || !password) {
       console.log("Please fill in all the fields");

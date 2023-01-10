@@ -1,13 +1,14 @@
 import bcrypt from "bcryptjs"
+import { PassportStatic } from "passport";
 import LocalStrategy from "passport-local"
-import { User } from "../models/User";
+import { UserModel } from "../models/User";
 //Load model
 
-export const loginCheck = (passport:any) => {
+export const loginCheck = (passport:PassportStatic) => {
   passport.use(
     new LocalStrategy.Strategy({ usernameField: "email" }, (email:any, password:any, done) => {
       //Check customer
-      User.findOne({ email: email })
+      UserModel.findOne({ email: email })
         .then((user) => {
           if (!user) {
             console.log("wrong email");
@@ -24,14 +25,14 @@ export const loginCheck = (passport:any) => {
             }
           });
         })
-        .catch((error) => console.log(error));
+        .catch((error: string) => console.log(error));
     })
   );
   passport.serializeUser((user:any, done:any) => {
     done(null, user.id);
   });
   passport.deserializeUser((id:any, done:any) => {
-    User.findById(id, (error:any, user:any) => {
+    UserModel.findById(id, (error:string, user:any) => {
       done(error, user);
     });
   });

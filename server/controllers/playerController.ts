@@ -1,10 +1,10 @@
-import Player from "../models/Player";
+import PlayerModel from "../models/Player";
 import { Response, Request } from "express";
-import passport from "passport";
+import { Player } from "../types/types";
 
 export const createPlayer = (req: Request, res: Response) => {
-  console.log(req.body);
-  const { name, wins, loses, draws, championships, federations, lastMatch,debiut} = req.body;
+
+  const { name, wins, loses, draws, federations, lastMatch,debiut}: Player = req.body;
 
 
   const calculateRanking =(wins: number,loses: number,draws: number, matches: number) => {
@@ -30,14 +30,13 @@ export const createPlayer = (req: Request, res: Response) => {
       console.log("Wypełnij wszystkie pola");
     } else {
       
-      const newPlayer = new Player({
+      const newPlayer = new PlayerModel({
         name,
         wins,
         draws,
         loses,
-        championships,
-        matches: (parseInt(wins) + parseInt(loses) + parseInt(draws)),
-        points: calculateRanking(wins,loses,draws, (parseInt(wins) + parseInt(loses) + parseInt(draws))),
+        matches: (Number(wins) + Number(loses) + Number(draws)),
+        points: calculateRanking(wins, loses, draws, (Number(wins) + Number(loses) + Number(draws))),
         federations: federations,
         lastMatch: lastMatch,
         debiut: debiut,
@@ -55,7 +54,7 @@ export const createPlayer = (req: Request, res: Response) => {
  
 export const getPlayers = async (req: Request, res: Response) => {
   try {
-    const players = await Player.find();
+    const players = await PlayerModel.find();
  
     //console.log(players);
     players.sort((a:any, b:any) => {
@@ -64,7 +63,7 @@ export const getPlayers = async (req: Request, res: Response) => {
     });
 
     players.map((player, index) => {
-      let rankDif;  
+      let rankDif : number;  
       if(player.lastRank === index+1){
           rankDif = 0;
         }
@@ -73,7 +72,7 @@ export const getPlayers = async (req: Request, res: Response) => {
         }
       
 
-        Player.findOneAndUpdate(player._id,{$set: {currentRank: index+1, rankDif:rankDif, lastRank:player.lastRank}}, { new: true },
+        PlayerModel.findOneAndUpdate(player._id,{$set: {currentRank: index+1, rankDif:rankDif, lastRank:player.lastRank}}, { new: true },
           (err, model) => {
             if (err) {
               //console.error(err);
@@ -82,7 +81,7 @@ export const getPlayers = async (req: Request, res: Response) => {
             }
           })
     })
-    const sortedPlayers = await Player.find();
+    const sortedPlayers = await PlayerModel.find();
 
     //console.log(sortedPlayers);
     res.json(sortedPlayers);

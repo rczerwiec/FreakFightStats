@@ -116,7 +116,7 @@ export default function Table({ players }: {players:Player[];}) {
                         asc: " 🔼",
                         desc: " 🔽",
                       }[header.column.getIsSorted() as string] ?? null}
-                    </div>
+                    </div> 
                   )}
                 </th>
               ))}
